@@ -1,0 +1,9 @@
+SELECT NAME, round(VOTE,1) as VOTE, REST_TYPE
+FROM (
+    SELECT NAME, avg(VOTES) as vote, REST_TYPE
+    FROM target_dynamic_table
+    WHERE TYPE = 'delivery'
+    group by name, REST_TYPE
+    order by vote desc
+)
+WHERE ROWNUM <= 5
